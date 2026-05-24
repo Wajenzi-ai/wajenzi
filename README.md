@@ -31,19 +31,34 @@ npm run dev
 
 ## Cloudflare Pages
 
-Set the build command to:
+This project uses a static Next.js export. Use **Cloudflare Pages**, not Workers/OpenNext.
 
-```bash
-npm run build
+Use these Cloudflare settings:
+
+```text
+Framework preset: Next.js (Static HTML Export) or None
+Build command: npm run build
+Build output directory: out
+Deploy command: leave blank
+Root directory: /
 ```
 
-Set the output directory to:
+Do not use:
 
-```bash
-out
+```text
+npx wrangler deploy
+npx opennextjs-cloudflare build
+.next
+.vercel/output/static
 ```
 
 Add these environment variables in Cloudflare Pages:
 
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+
+If deploying manually from your computer, build first and upload the generated `out` folder, or run:
+
+```bash
+npm run pages:deploy
+```
